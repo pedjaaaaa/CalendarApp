@@ -25,38 +25,48 @@
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
   <script type="text/javascript">
-    $(document).ready(function () {
 
+    $(document).ready(function () {
       console.log("document loaded");
     });
 
-    // Variables
+    //-- Variables --//
+
     var time = moment().format('dddd, MMMM Do');
     var timeOfDay = ["9am", "10am", "11am", "12pm", "1pm", "2pm", "3pm", "4pm", "5pm"];
+    var textArea = $('#textInput');
 
-    // Running
+
+    //-- Running --//
+
     currentDate();
     createRows();
+    saveButton();
+    colColor();
 
-    // Functions
+
+    //-- Functions --//
+
+    // Current Date
     function currentDate() {
       $("#currentDay").text(time);
-    }
+    };
 
+    // Created rows and columns
     function createRows() {
       for (var i = 0; i < timeOfDay.length; i++) {
 
-        console.log("createRows ran")
+        console.log("createRows ran");
 
         var row = $("<div class='row'>");
         var col = $("<div class='col-lg-1 border-right border-top border-bottom'>").text(timeOfDay[i]);
-        var colInput = $("<div class='col-lg-10 border border-white'><textarea class='form-control py-3 border border-white' aria-label='With textarea'>");
-        var colSave = $("<div class='col-lg-1 bg-info border-bottom mb-1'><button type='button' class='btn'>&#128190;</button>");
+        var colInput = $("<div class='col-lg-10 border border-white'><textarea id='textInput' class='form-control py-3 border border-white' aria-label='With textarea' type='text'>");
+        var colSave = $("<div class='col-lg-1 bg-info border-bottom mb-1'><button type='button' class='btn' id='saveButton'>&#128190;</button>");
 
         $(row).append(col);
         $(row).append(colInput);
         $(row).append(colSave);
-   
+
         $(row).attr("id", timeOfDay[i]);
         $(col).attr("id", timeOfDay[i]);
         $(colInput).attr("id", timeOfDay[i]);
@@ -66,18 +76,21 @@
       }
     };
 
-    // Next Steps: OnClick Save to localStorage & change background color based on time.
+    // Row colors
+    function colColor() {
+      console.log("colColor ran");
+    };
 
+    function saveButton() {
+      if (localStorage.getItem(textArea)) {
+        textArea.html(localStorage.getItem(textArea));
+      }
 
-    // function saveInput() {
-    //   var input = $("save");
-    //   localStorage.setItem("server", input.val());
-
-    //   $("#saveButton").on("click" function(){
-
-    //   })
-
-
+      $("#saveButton").on("click", function () {
+        textArea.append($('#textInput').val());
+        localStorage.setItem()
+      });
+    };
 
   </script>
 </body>
