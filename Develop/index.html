@@ -49,24 +49,24 @@
 
     //Save and Load
     function loadFunction() {
-          if (localStorage /= !null) {
-            $('input[type="text"]').each(function () {
-              var id = $(this).attr('id');
-              var value = localStorage.getItem(id);
-              $(this).val(value);
-            })
-          }
-        };
+      if (localStorage /= !null) {
+        $('input[type="text"]').each(function () {
+          var id = $(this).attr('id');
+          var value = localStorage.getItem(id);
+          $(this).val(value);
+        })
+      }
+    };
 
-        $("#saveButton").on("click", function () {
-          $('textarea[type="text"]').each(function () {
-            var id = $(this).attr('id');
-            var value = $(this).val();
-            window.localStorage.setItem(id, value);
-            console.log(localStorage);
-            console.log(textArea);
-          });
-        });
+    $("#saveButton").on("click", function () {
+      $('textarea[type="text"]').each(function () {
+        var id = $(this).attr('id');
+        var value = $(this).val();
+        window.localStorage.setItem(id, value);
+        console.log(localStorage);
+        console.log(textArea);
+      });
+    });
 
 
     // Current Date
@@ -121,7 +121,7 @@
         //   };
         $(".container").append(row);
 
-      
+
 
 
         // }
