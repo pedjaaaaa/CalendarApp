@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <script type="text/javascript">
+            // For saving data:
+            window.onbeforeunload = function() {
+                var name = document.getElementById("name");
+                // ...
+                localStorage.setItem("name", name.value);
+                // ...
+            }
+            // For loading data:
+            window.onload = function() {
+                var name = localStorage.getItem(name);
+                if (name !== null) document.getElemenyById("name").value = name;
+                // ...
+            }
+        </script>
+        <title></title>
+    </head>
+    <body>
+        <div id="section">
+            <form id="franchiseForm" action="Order_confirmation.php" method="POST">
+                <div class="field">
+                    <label for="name">Name</label>
+                    <input type="text" name="franc_name" id="name" placeholder="Joe Blogs" required tabindex="2">
+                    <br>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>

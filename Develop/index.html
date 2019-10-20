@@ -28,24 +28,46 @@
 
     $(document).ready(function () {
       console.log("document loaded");
+      loadFunction();
+
     });
+
 
     //-- Variables --//
 
     var time = moment().format('dddd, MMMM Do');
-    var timeOfDay = ["9am", "10am", "11am", "12pm", "1pm", "2pm", "3pm", "4pm", "5pm"];
+    var timeOfDay = ["9AM", "10AM", "11AM", "12PM", "1PM", "2PM", "3PM", "4PM", "5PM"];
     var textArea = $('#textInput');
-
+    var now = moment().format('hA');
 
     //-- Running --//
 
     currentDate();
     createRows();
-    saveButton();
-    colColor();
-
 
     //-- Functions --//
+
+    //Save and Load
+    function loadFunction() {
+          if (localStorage /= !null) {
+            $('input[type="text"]').each(function () {
+              var id = $(this).attr('id');
+              var value = localStorage.getItem(id);
+              $(this).val(value);
+            })
+          }
+        };
+
+        $("#saveButton").on("click", function () {
+          $('textarea[type="text"]').each(function () {
+            var id = $(this).attr('id');
+            var value = $(this).val();
+            window.localStorage.setItem(id, value);
+            console.log(localStorage);
+            console.log(textArea);
+          });
+        });
+
 
     // Current Date
     function currentDate() {
@@ -56,41 +78,58 @@
     function createRows() {
       for (var i = 0; i < timeOfDay.length; i++) {
 
+        console.log(timeOfDay[i]);
         console.log("createRows ran");
+        console.log(i);
+        console.log(hour);
 
         var row = $("<div class='row'>");
-        var col = $("<div class='col-lg-1 border-right border-top border-bottom'>").text(timeOfDay[i]);
-        var colInput = $("<div class='col-lg-10 border border-white'><textarea id='textInput' class='form-control py-3 border border-white' aria-label='With textarea' type='text'>");
-        var colSave = $("<div class='col-lg-1 bg-info border-bottom mb-1'><button type='button' class='btn' id='saveButton'>&#128190;</button>");
+        var col = $("<div class='col-lg-1 border-right border-top border-bottom mb-1'>").text(timeOfDay[i]);
+        var colInput = $("<div class='col-lg-10 border border-white'>");
+        var hourBlock = $("<textarea id='textInput' class='form-control py-3 border border-white' aria-label='With textarea' type='text'>");
+        var colSave = $("<div class='col-lg-1 bg-info border-bottom mb-1 btn'><button type='button' class='btn' id='saveButton'>&#128190;</button>");
+        var hour = $("textarea").value;
 
         $(row).append(col);
-        $(row).append(colInput);
+        $(row).append(colInput.append(hourBlock));
         $(row).append(colSave);
 
-        $(row).attr("id", timeOfDay[i]);
-        $(col).attr("id", timeOfDay[i]);
-        $(colInput).attr("id", timeOfDay[i]);
-        $(colSave).attr("id", timeOfDay[i]);
+        //$(row).attr("id", timeOfDay[i]);
+        //$(col).attr("id", timeOfDay[i]);
+        $(hourBlock).attr("value", timeOfDay[i]);
+        //$(colSave).attr("id", timeOfDay[i]);
 
+        // if (timeofDay[i] < ) {
+
+        // }
+
+        //   // Color textarea
+        //   function colColor() {
+
+        //     console.log("colColor ran");
+        //     console.log(now);
+
+        //     if (hour === now) {
+        //       $(hourBlock).addClass("id", "now");
+
+        //     } else if (now > hour) {
+        //       $(hourBlock).addClass("id", "past");
+
+        //     } else if (now < hour) {
+        //       $(hourBlock).addClass("id, future");
+        //     }
+        //   };
         $(".container").append(row);
-      }
+
+      
+
+
+        // }
+      };
     };
 
-    // Row colors
-    function colColor() {
-      console.log("colColor ran");
-    };
 
-    function saveButton() {
-      if (localStorage.getItem(textArea)) {
-        textArea.html(localStorage.getItem(textArea));
-      }
-
-      $("#saveButton").on("click", function () {
-        textArea.append($('#textInput').val());
-        localStorage.setItem()
-      });
-    };
+    // Row colors -- If moment() === div ID set color to red, else if div ID < moment() set color to grey, else div ID > moment() set to green
 
   </script>
 </body>
